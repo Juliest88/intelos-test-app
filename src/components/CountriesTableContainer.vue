@@ -144,8 +144,19 @@ export default defineComponent({
           key: 'viewMap',
           minWidth: 100,
           maxWidth: 100,
-          render: () => {
-            return h(IconMoreHrizontal)
+          render: (row) => {
+            return h(
+              'div',
+              {
+                class: 'view-map',
+                onMouseenter: () => (row.hover = true),
+                onMouseleave: () => (row.hover = false),
+              },
+              [
+                h(IconMoreHrizontal, { style: row.hover ? 'display: none;' : 'display: block;' }),
+                h(IconVisibility, { style: row.hover ? 'display: block;' : 'display: none;' }),
+              ],
+            )
           },
         },
       ],
@@ -232,6 +243,19 @@ export default defineComponent({
       color: #2e5bff;
       font-size: 12px;
       font-weight: 500;
+    }
+  }
+
+  .view-map {
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: #d1d5db;
+      border-radius: 50%;
     }
   }
 
